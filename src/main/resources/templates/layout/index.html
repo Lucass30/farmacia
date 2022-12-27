@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/sistema/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/sistema/img/favicon.ico}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>BOTICA V&S</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <!-- CSS Files -->
+  <link th:href="@{/sistema/css/bootstrap.min.css}" rel="stylesheet" />
+  <link th:href="@{/sistema/css/light-bootstrap-dashboard.css}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link th:href="@{/sistema/css/demo.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+
+  <!--SlideBar -->
+  <aside class="sidebar" data-color="blue" data-image="../sistema/img/sidebar-5.jpg">
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a href="#" class="simple-text">BOTICA VIDA & SALUD</a>
+      </div>
+      <ul class="nav">
+        <li>
+          <a class="nav-link" th:href="@{/}">
+            <i class="nc-icon nc-chart-pie-35"></i>
+            <p>Inicio</p>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" th:href="@{/inventario/listar}">
+            <i class="nc-icon nc-paper-2"></i>
+            <p>Sucursales</p>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" th:href="@{/proveedor/listar}">
+            <i class="nc-icon nc-paper-2"></i>
+            <p>Proveedores</p>
+          </a>
+        </li>
+        <li >
+          <a class="nav-link" th:href="@{/categoria/listar}">
+            <i class="nc-icon nc-layers-3"></i>
+            <p>Categorias</p>
+          </a>
+        </li>
+        <li >
+          <a class="nav-link" th:href="@{/producto/listar}">
+            <i class="nc-icon nc-notes"></i>
+            <p>Materiales/Equipos</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/usuario/listar}">
+            <i class="nc-icon nc-single-02"></i>
+            <p>Usuarios</p>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" th:href="@{/venta/}">
+            <i class="nc-icon nc-cart-simple"></i>
+            <p>Ventas</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <!--Fin de SlideBar-->
+
+  <div class="main-panel">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">
+                <span class="no-icon">Salir</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="content">
+      <div class="container-fluid">
+
+      </div>
+    </div>
+
+    <!-- Foooter -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav>
+          <p class="copyright text-center">
+            ©
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+            <strong >GRUPO STS</strong>, Soluciones a problemas complejos
+          </p>
+        </nav>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+  </div>
+
+</div>
+</body>
+<th:block th:fragment="scripts">
+  <!--   Core JS Files   -->
+  <script th:src="@{/sistema/js/core/jquery.3.2.1.min.js}" type="text/javascript"></script>
+  <script th:src="@{/sistema/js/core/popper.min.js}" type="text/javascript"></script>
+  <script th:src="@{/sistema/js/core/bootstrap.min.js}" type="text/javascript"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script th:src="@{/sistema/js/plugins/bootstrap-switch.js}"></script>
+  <!--  Google Maps Plugin    -->
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!--  Chartist Plugin  -->
+  <script th:src="@{/sistema/js/plugins/chartist.min.js}"></script>
+  <!--  Notifications Plugin    -->
+  <script th:src="@{/sistema/js/plugins/bootstrap-notify.js}"></script>
+  <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+  <script th:src="@{/sistema/js/light-bootstrap-dashboard.js}" type="text/javascript"></script>
+  <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+  <script th:src="@{/sistema/js/demo.js}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      demo.initDashboardPageCharts();
+
+      demo.showNotification();
+
+    });
+  </script>
+</th:block>
+
+<th:block layout:fragment="page-scripts">
+
+</th:block>
+</html>

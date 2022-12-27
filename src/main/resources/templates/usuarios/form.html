@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<div class="wrapper">
+
+    <aside th:replace="layout/layout :: aside"></aside>
+
+
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">
+                                <span class="no-icon">Salir</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title" > DATOS DEL USUARIO : </h4>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/usuario/save}" th:object="${usuario}" method="post" enctype="multipart/form-data">
+                                    <hr style="border:2px;">
+                                    <div class="row">
+                                        <div class="col-3">DATOS DE INGRESO AL SISTEMA</div>
+                                        <div class="col-9"><hr style="border:2px;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 pr-1">
+                                            <div class="form-group">
+                                            <label>Rol</label>
+                                                <select id="roles" class="form-control" name="rol_id" >
+                                                    <option selected disabled>Elija una opcion</option>
+                                                    <th:block th:each="rol:${roles}" >
+                                                        <option th:value="${rol.id}" th:text="${rol.descripcion}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 px-1">
+                                            <div class="form-group">
+                                                <label >Email</label>
+                                                <input type="email" th:field="*{email}" class="form-control"
+                                                       placeholder="Ingrese su email"
+                                                       th:errorclass="'form-control alert-danger'" /> <small
+                                                    class="form-text text-danger"
+                                                    th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 pl-1">
+                                            <div class="form-group">
+                                                <label >Contraseña</label>
+                                                <input type="password" th:field="*{password}" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                       th:errorclass="'form-control alert-danger'" required/>
+                                                <small class="form-text text-danger"
+                                                        th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr style="border:2px;">
+                                    <div class="row">
+                                        <div class="col-3">DATOS PERSONALES DEL TRABAJADOR</div>
+                                        <div class="col-9"><hr style="border:2px;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 pr-1">
+                                            <label >Foto</label>
+                                                <input class="form-control" type="file" name="file" >
+                                        </div>
+                                        <div class="col-md-4 px-1">
+                                            <label >Teléfono</label>
+                                            <input type="number" th:field="*{telefono}" class="form-control"
+                                                   placeholder="Ingrese su telefono"
+                                                   th:errorclass="'form-control alert-danger'" /> <small
+                                                class="form-text text-danger"
+                                                th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+                                        </div>
+                                        <div class="col-md-4 pl-1">
+                                            <label >DNI</label>
+                                            <input type="number" th:field="*{dni}" class="form-control"
+                                                   placeholder="Ingrese su dni"
+                                                   th:errorclass="'form-control alert-danger'" /> <small
+                                                class="form-text text-danger"
+                                                th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 pr-1">
+                                            <div class="form-group">
+                                                <label>Nombres</label>
+                                                <input type="text" th:field="*{nombres}" class="form-control" placeholder="Ej. Maria Gabriela"
+                                                       th:errorclass="'form-control alert-danger'" required/>
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('nombres')}"
+                                                       th:errors="*{nombres}"></small>                                            </div>
+                                        </div>
+                                        <div class="col-md-6 pl-1">
+                                            <div class="form-group">
+                                                <label>Apellidos</label>
+                                                <input type="text" th:field="*{apellidos}" class="form-control" placeholder="Ej. Ramirez Garcia"
+                                                       th:errorclass="'form-control alert-danger'" required/>
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('apellidos')}"
+                                                       th:errors="*{apellidos}"></small>                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9 pr-1">
+                                            <div class="form-group">
+                                                <label>Dirección</label>
+                                                <input type="text" th:field="*{direccion}" class="form-control" placeholder="Ej. Av. Jesús de Nazareth 128 Trujillo La Libertad"
+                                                       th:errorclass="'form-control alert-danger'" required/>
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}"
+                                                       th:errors="*{direccion}"></small>                                             </div>
+                                        </div>
+                                        <div class="col-md-3 pl-1">
+                                            <div class="form-group">
+                                                <label>Cod. Postal</label>
+                                                <input type="text" th:field="*{codPostal}" class="form-control" placeholder="Ej. 13009"
+                                                       th:errorclass="'form-control alert-danger'" required/>
+                                                <small class="form-text text-danger" th:if="${#fields.hasErrors('codPostal')}"
+                                                       th:errors="*{codPostal}"></small>                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 pr-1">
+                                            <div class="form-group">
+                                                <label>Departamento</label>
+                                                <select   class="form-control" name="departamento" id="departamento" >
+                                                    <option value="" selected disabled>Seleccione un departamento</option>
+                                                    <th:block th:each="departamento: ${departamentos}">
+                                                        <option th:value="${departamento.id}">[[${departamento.descripcion}]]</option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 px-1">
+                                            <div class="form-group">
+                                                <label>Provincia</label>
+                                                <select class="form-control" name="provincia" id="provincia">
+                                                    <option value="" selected disabled>Seleccione un departamento</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-1">
+                                            <div class="form-group">
+                                                <label>Distrito</label>
+                                                <select  th:field="*{distrito.id}" class="form-control"name="distrito" id="distrito">
+                                                    <option value="" selected disabled>Seleccione un departamento</option>
+                                                </select>
+                                                <small class="form-text text-danger"
+                                                       th:if="${#fields.hasErrors('distrito')}" th:errors="*{distrito}"></small>                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-5"></div>
+                                        <div class="col-4">
+                                            <a th:href="@{'/usuario/listar'}" class="btn btn-danger">Regresar</a>
+                                            <button type="submit" class="btn btn-success ">Guardar</button>
+                                        </div>
+                                        <div class="col-3"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="layout/layout :: footer"></footer>
+    </div>
+</div>
+    <th:block th:replace="layout/layout :: scripts">
+
+    </th:block>
+    <th:block layout:fragment="page-scripts">
+        <script th:replace="usuarios/js/autocomplete-pd :: javascript"></script>
+    </th:block>
+</body>
+</html>

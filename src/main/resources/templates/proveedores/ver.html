@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<head th:replace="layout/layout :: head"></head>
+<body>
+<div class="wrapper">
+
+  <aside th:replace="layout/layout :: aside"></aside>
+
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">
+                <span class="no-icon">Salir</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title" th:text="${titulo}"></h4>
+              </div>
+              <div class="card bg-light">
+                <div class="card-body">
+
+                  <h4 class="card-title">
+                    <div class="row">
+                      <div class="col">
+                        <a th:href="@{'/ordencompra/form/' + ${proveedor.id}}" class="btn btn-success ">Crear Orden de Compra</a>
+                      </div>
+                    </div>
+                  </h4>
+                  <br>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-header">
+                        <h5 class="card-title">DATOS</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6 pr-1">
+                            <div class="form-group">
+                              <label>Nombre</label>
+                              <input type="text" th:field="${proveedor.nombre}" class="form-control" disabled/>
+                            </div>
+                          </div>
+                          <div class="col-md-6 pl-1">
+                            <div class="form-group">
+                              <label>RUC</label>
+                              <input type="text" th:field="${proveedor.ruc}" class="form-control" disabled/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Direccion</label>
+                              <input type="text" th:field="${proveedor.direccion}" class="form-control" disabled/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div th:if="${#lists.isEmpty(proveedor.ordenCompras)}"
+                       class="alert alert-info my-4"
+                       th:text="'No hay ordenes de compra hechas al proveedor ' + ${proveedor.nombre}"></div>
+
+                  <table th:if="${not #lists.isEmpty(proveedor.ordenCompras)}"
+                         class="table table-bordered table-striped my-4">
+                    <thead class="thead-dark">
+                    <tr>
+                      <th>folio</th>
+                      <th>descripción</th>
+                      <th>fecha</th>
+                      <th>total</th>
+                      <th>ver</th>
+                      <th>eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="orden: ${proveedor.ordenCompras}">
+                      <td th:text="${orden.id}"></td>
+                      <td th:text="${orden.descripcion}"></td>
+                      <td th:text="${orden.createAt}"></td>
+                      <td th:text="${orden.total}"></td>
+                      <td><a class="btn btn-primary btn-sm" th:href="@{'/ordencompra/ver/' + ${orden.id}}" th:text="'detalle'"></a></td>
+                      <td><a class="btn btn-danger btn-sm" th:href="@{'/ordencompra/eliminar/' + ${orden.id}}" th:text="'eliminar'"
+                             onclick="return confirm('¿Estas seguro que desea eliminar la Orden de Compra?');"></a></td>
+                    </tr>
+                    </tbody>
+
+                  </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="layout/layout :: footer"></footer>
+
+  </div>
+</div>
+</body>
+<th:block th:replace="layout/layout :: scripts">
+
+</th:block>
+
+</html>
